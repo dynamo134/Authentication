@@ -23,43 +23,25 @@ const validateSignupData = async (req, res) => {
 
   if (!name || !email || !password) {
     res.status(400).json({ message: 'Please fill all the fields' });
-}
+  }
 
-  // if (name.trim().length === 0) {
-  //   res.status(400).json({ message: "Please Enter a Name" });
-  //   return false;
-  // }
 
   if (!validator.validate(email)) {
     res.status(400).json({ message: "Please Enter a valid email" });
     return false;
   }
-  // if (!isEmail(email)) {
-  //   res.status(400).json({ message: "Please Enter a valid email" });
-  //   return false;
-  // }
-
-  // if (password.trim().length === 0) {
-  //   res.status(400).json({ message: "Please Enter password" });
-  //   return false;
-  // } else if (password.trim().length <= 5) {
-  //   res
-  //     .status(400)
-  //     .json({ message: "Minimum password length is 6 characters" });
-  //   return false;
-  // }
-
-  if (!schema.validate(password)) {
-    console.log("Weak password");
-    res.status(400).json({ message: 'Weak password' });
-    return false;
-  }
-
-  // check if email exists in DB!
+ 
+  // check if email exists in DB
   const existingUser = await User.findOne({ email: email }).exec();
   if (existingUser) {
     console.log("Email Already Registered");
     res.status(400).json({ message: "Email Already Registered" });
+    return false;
+  }
+  //for the password
+  if (!schema.validate(password)) {
+    console.log("Weak password");
+    res.status(400).json({ message: 'Weak password' });
     return false;
   }
   return true;
