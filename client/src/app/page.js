@@ -35,12 +35,17 @@ export default function Home() {
       className={`${
         pageReady ? "block" : "hidden"  // Conditionally rendering main based on page readiness
       } w-full h-screen grid place-items-center`}
-    >
-      <div className="p-4 bg-accentDark text-white w-[400px] h-[250px] text-center space-y-4">
-        <p>Hi {user?.name}, Welcome!</p>  
-        <p>{user?.email}</p>  
+    > 
+      <div className="p-8 shadow-lg bg-accentDark text-white w-[400px] h-[200px]  flex flex-col gap-2 my-6">
+        <h1 className="font-bold text-xl text-center">Welcome back!</h1>
+      <div>
+          Name: <span className="font-bold">{user?.name}</span>
+        </div> 
+        <div>
+          Email: <span className="font-bold">{user?.email}</span>
+        </div> 
         <button
-          className="bg-accent px-4 py-2 text-white"
+          className="bg-accent px-4 py-2 my-4 text-white"
           onClick={handleLogOut}  // Handling click event for logout button
         >
           Logout
