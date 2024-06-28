@@ -6,7 +6,7 @@ const User = require("../models/User");
 module.exports = async (req, res) => {
   const { email, password } = req.body;
 
-  // check if email exists in DB!
+  // check if email exists in DB
   const dbUser = await User.findOne({ email: email }).exec();
 
   if (dbUser) {
